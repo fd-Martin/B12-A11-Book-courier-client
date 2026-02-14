@@ -4,10 +4,12 @@ import './index.css'
 import App from './App.jsx'
 import { router } from './Routes/router.jsx'
 import { RouterProvider } from 'react-router'
+import { QueryClientContext } from '@tanstack/react-query'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    {/* <App /> */}
-     <RouterProvider router={router} />
-  </StrictMode>,
+  <QueryClientProvider client={QueryClientContext}>
+    <AuthProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
+  </QueryClientProvider>,
 )
