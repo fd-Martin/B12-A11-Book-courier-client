@@ -1,9 +1,12 @@
 import React from 'react';
+import Slider from '../Slider/Slider';
+import LastestBookSection from '../LastestBookSection/LastestBookSection';
 
 const Home = () => {
     return (
         <div>
-            this is home
+            <Slider></Slider>
+            <LastestBookSection></LastestBookSection>
         </div>
     );
 };

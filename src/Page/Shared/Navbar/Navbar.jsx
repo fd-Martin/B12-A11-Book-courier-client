@@ -1,15 +1,22 @@
 import React from "react";
 import Logo from "../../../Components/Logo/Logo";
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 
 const Navbar = () => {
-    const links=<>
-            
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/allbooks">All Books</Link></li>
+  const links = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/allbooks">All Books</NavLink>
+      </li>
 
-        <li><a>Item 3</a></li>
+      <li>
+        <a>Item 3</a>
+      </li>
     </>
+  );
   return (
     <div className="max-w-7xl mx-auto w-full flex-1">
       <div className="navbar bg-base-100 shadow-sm">
@@ -36,15 +43,13 @@ const Navbar = () => {
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-{links}
+              {links}
             </ul>
           </div>
           <Logo></Logo>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-{links}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
           <a className="btn">Button</a>
