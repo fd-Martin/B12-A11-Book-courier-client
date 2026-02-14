@@ -4,6 +4,9 @@ import App from "../App";
 import Home from "../Page/Home/Home/Home";
 import DashBoardLayout from "../Layout/DashBoardLayout";
 import AllBooks from "../Page/AllBooks/AllBooks";
+import AuthenticationLayout from "../Layout/AuthenticationLayout";
+import Register from "../Page/Authentication/Register";
+import Login from "../Page/Authentication/Login";
 
 export const router = createBrowserRouter([
   {
@@ -15,8 +18,8 @@ export const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path:'/allbooks',
-        element: <AllBooks></AllBooks>
+        path: "/allbooks",
+        element: <AllBooks></AllBooks>,
       },
     ],
   },
@@ -24,5 +27,19 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <DashBoardLayout></DashBoardLayout>,
     children: [{}],
+  },
+  {
+    path: "/authentication",
+    element: <AuthenticationLayout></AuthenticationLayout>,
+    children: [
+      {
+        path: "register",
+        Component: Register,
+      },
+      {
+        path: "login",
+        Component: Login,
+      },
+    ],
   },
 ]);
