@@ -131,7 +131,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { signInUser, forgetPassword } = useAuth();
+  const { signInUser, resetPassword } = useAuth();
 
   const {
     register,
@@ -172,7 +172,7 @@ const Login = () => {
       });
     }
 
-    forgetPassword(email)
+    resetPassword(email)
       .then(() => {
         Swal.fire({
           icon: "success",
