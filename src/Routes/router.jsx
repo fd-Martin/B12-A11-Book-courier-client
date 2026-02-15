@@ -7,6 +7,7 @@ import AllBooks from "../Page/AllBooks/AllBooks";
 import AuthenticationLayout from "../Layout/AuthenticationLayout";
 import Register from "../Page/Authentication/Register";
 import Login from "../Page/Authentication/Login";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashBoardLayout></DashBoardLayout>,
+    element:<PrivateRoute><DashBoardLayout></DashBoardLayout></PrivateRoute>,
     children: [{}],
   },
   {

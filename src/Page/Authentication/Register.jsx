@@ -1,203 +1,17 @@
-// import React, { useState } from "react";
-// import { useForm } from "react-hook-form";
-// import axios from "axios";
-// import Swal from "sweetalert2";
-// import { Link, useNavigate } from "react-router";
-// import useAuth from "../../hooks/useAuth";
-// import useAxiosSecure from "../../hooks/useAxiosSecure";
-// import SocialLogin from "../../Components/SocialLogin/SocialLogin";
-// import Loading from "../../Components/Loading/Loading";
-// import { FaEye, FaEyeSlash } from "react-icons/fa";
-// const Register = () => {
-//   const [loading, setLoading] = useState(false);
-//   const navigate = useNavigate();
-//   const axiosSecure = useAxiosSecure();
-//   const { createUser, updateUserProfile } = useAuth();
-//   const [showPassword, setShowPassword] = useState(false);
-
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm();
-
-//   const handleRegistration = (data) => {
-//     setLoading(true);
-//     const profileImg = data.photo[0];
-//     createUser(data.email, data.password)
-//       .then(() => {
-//         //store the profile img
-//         const formData = new FormData();
-//         formData.append("image", profileImg);
-
-//         //get the url
-//         const image_Api_Url = `https://api.imgbb.com/1/upload?key=${
-//           import.meta.env.VITE_img_host_key
-//         }`;
-
-//         axios.post(image_Api_Url, formData).then((res) => {
-//           const photo = res.data.data.url;
-
-//           //update profile
-//           const userProfile = {
-//             displayName: data.name,
-//             photoURL: photo,
-//           };
-
-//           updateUserProfile(userProfile).then(() => {
-//             const user = {
-//               displayName: data.name,
-//               photoURL: photo,
-//               email: data.email,
-//             };
-//             axiosSecure.post("/users", user).then((res) => {
-//               if (res.data.insertedId) {
-//                 navigate("/");
-//                 Swal.fire({
-//                   position: "center",
-//                   icon: "success",
-//                   title: "Registered Successfullly",
-//                   showConfirmButton: false,
-//                   timer: 1500,
-//                 });
-//                 setLoading(false);
-//               }
-//             });
-//           });
-//         });
-//       })
-//       .catch((err) => {
-//         setLoading(false);
-//         console.log(err);
-//       });
-//   };
-
-//   if (loading) {
-//     return <Loading></Loading>;
-//   }
-
-//   return (
-//     <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl p-10">
-//       <h1 className="text-5xl font-bold text-secondary text-center">
-//         Register now!
-//       </h1>
-//       <div className="card-body p-10">
-//         <form onSubmit={handleSubmit(handleRegistration)}>
-//           <fieldset className="fieldset">
-//             {/* name */}
-//             <label className="label text-primary md:text-xl font-bold">
-//               Name
-//             </label>
-//             <input
-//               type="text"
-//               className="input mb-3 w-full"
-//               placeholder="Your Name"
-//               {...register("name", { required: true })}
-//             />
-//             {errors.name?.type === "required" && (
-//               <p className="text-red-500 font-semibold">Name is required</p>
-//             )}
-//             {/* photo */}
-//             <label className="label text-primary md:text-xl font-bold">
-//               Photo
-//             </label>
-//             <input
-//               type="file"
-//               className="file-input w-full"
-//               {...register("photo", { required: true })}
-//             />
-//             {errors.photo?.type === "required" && (
-//               <p className="text-red-500 font-semibold">Photo is required</p>
-//             )}
-//             {/* email */}
-//             <label className="label text-primary md:text-xl font-bold">
-//               Email
-//             </label>
-//             <input
-//               type="email"
-//               className="input my-3 w-full"
-//               placeholder="Email"
-//               {...register("email", { required: true })}
-//             />
-//             {errors.email?.type === "required" && (
-//               <p className="text-red-500 font-semibold">Email is required</p>
-//             )}
-
-//             <div>
-//               {/* password */}
-//               <label className="label text-primary md:text-xl font-bold">
-//                 Password
-//               </label>
-
-//               <div className="relative">
-//                 <input
-//                   type={showPassword ? "text" : "password"}
-//                   className="input w-full pr-12"
-//                   placeholder="Password"
-//                   {...register("password", {
-//                     required: true,
-//                     minLength: 6,
-//                     pattern:
-//                       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/,
-//                   })}
-//                 />
-
-//                 <button
-//                   type="button"
-//                   onClick={() => setShowPassword(!showPassword)}
-//                   className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
-//                 >
-//                   {showPassword ? (
-//                     <FaEyeSlash size={20} />
-//                   ) : (
-//                     <FaEye size={20} />
-//                   )}
-//                 </button>
-//               </div>
-
-//               {errors.password && (
-//                 <p className="text-red-500 font-semibold">
-//                   Password should contain one uppercase, one lowercase, one
-//                   special character and must be at least 6 characters
-//                 </p>
-//               )}
-//             </div>
-//             <div>
-//               <a className="link link-hover">Forgot password?</a>
-//             </div>
-//             <button className="btn btn-primary mt-4">Register</button>
-//           </fieldset>
-//         </form>
-//         <p>
-//           Already have an account?
-//           <Link to="/auth/login">
-//             <span className="text-secondary text-xl font-bold"> Login</span>
-//           </Link>
-//         </p>
-//         <SocialLogin></SocialLogin>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Register;
-
-
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-// import axios from "axios"; // ❌ Not needed now
+import axios from "axios";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
-// import useAxiosSecure from "../../hooks/useAxiosSecure"; // ❌ Not needed
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import Loading from "../../Components/Loading/Loading";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  // const axiosSecure = useAxiosSecure(); // ❌ Commented
+  const axiosSecure = useAxiosSecure();
   const { createUser, updateUserProfile } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -209,44 +23,47 @@ const Register = () => {
 
   const handleRegistration = (data) => {
     setLoading(true);
-
-    // const profileImg = data.photo[0]; // ❌ Not uploading image now
-
+    const profileImg = data.photo[0];
     createUser(data.email, data.password)
       .then(() => {
-        // ✅ Just update Firebase profile (no image upload)
-        const userProfile = {
-          displayName: data.name,
-          // photoURL: "", // You can set default image if you want
-        };
+        //store the profile img
+        const formData = new FormData();
+        formData.append("image", profileImg);
 
-        updateUserProfile(userProfile).then(() => {
-          // ❌ Backend database save removed
-          /*
-          const user = {
+        //get the url
+        const image_Api_Url = `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_img_host_key
+        }`;
+
+        axios.post(image_Api_Url, formData).then((res) => {
+          const photo = res.data.data.url;
+
+          //update profile
+          const userProfile = {
             displayName: data.name,
             photoURL: photo,
-            email: data.email,
           };
 
-          axiosSecure.post("/users", user).then((res) => {
-            if (res.data.insertedId) {
-          */
-              
-              navigate("/");
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Registered Successfully",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-              setLoading(false);
-
-          /*
-            }
+          updateUserProfile(userProfile).then(() => {
+            const user = {
+              displayName: data.name,
+              photoURL: photo,
+              email: data.email,
+            };
+            axiosSecure.post("/users", user).then((res) => {
+              if (res.data.insertedId) {
+                navigate("/");
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Registered Successfullly",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                setLoading(false);
+              }
+            });
           });
-          */
         });
       })
       .catch((err) => {
@@ -256,7 +73,7 @@ const Register = () => {
   };
 
   if (loading) {
-    return <Loading />;
+    return <Loading></Loading>;
   }
 
   return (
@@ -267,7 +84,7 @@ const Register = () => {
       <div className="card-body p-10">
         <form onSubmit={handleSubmit(handleRegistration)}>
           <fieldset className="fieldset">
-            {/* Name */}
+            {/* name */}
             <label className="label text-primary md:text-xl font-bold">
               Name
             </label>
@@ -277,23 +94,22 @@ const Register = () => {
               placeholder="Your Name"
               {...register("name", { required: true })}
             />
-            {errors.name && (
-              <p className="text-red-500 font-semibold">
-                Name is required
-              </p>
+            {errors.name?.type === "required" && (
+              <p className="text-red-500 font-semibold">Name is required</p>
             )}
-
-            {/* Photo (optional now) */}
+            {/* photo */}
             <label className="label text-primary md:text-xl font-bold">
-              Photo (Optional)
+              Photo
             </label>
             <input
               type="file"
               className="file-input w-full"
-              {...register("photo")}
+              {...register("photo", { required: true })}
             />
-
-            {/* Email */}
+            {errors.photo?.type === "required" && (
+              <p className="text-red-500 font-semibold">Photo is required</p>
+            )}
+            {/* email */}
             <label className="label text-primary md:text-xl font-bold">
               Email
             </label>
@@ -303,61 +119,62 @@ const Register = () => {
               placeholder="Email"
               {...register("email", { required: true })}
             />
-            {errors.email && (
-              <p className="text-red-500 font-semibold">
-                Email is required
-              </p>
+            {errors.email?.type === "required" && (
+              <p className="text-red-500 font-semibold">Email is required</p>
             )}
 
-            {/* Password */}
-            <label className="label text-primary md:text-xl font-bold">
-              Password
-            </label>
+            <div>
+              {/* password */}
+              <label className="label text-primary md:text-xl font-bold">
+                Password
+              </label>
 
-            <div className="relative">
-              <input
-                type={showPassword ? "text" : "password"}
-                className="input w-full pr-12"
-                placeholder="Password"
-                {...register("password", {
-                  required: true,
-                  minLength: 6,
-                })}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="input w-full pr-12"
+                  placeholder="Password"
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    pattern:
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/,
+                  })}
+                />
 
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2"
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+                >
+                  {showPassword ? (
+                    <FaEyeSlash size={20} />
+                  ) : (
+                    <FaEye size={20} />
+                  )}
+                </button>
+              </div>
+
+              {errors.password && (
+                <p className="text-red-500 font-semibold">
+                  Password should contain one uppercase, one lowercase, one
+                  special character and must be at least 6 characters
+                </p>
+              )}
             </div>
-
-            {errors.password && (
-              <p className="text-red-500 font-semibold">
-                Password must be at least 6 characters
-              </p>
-            )}
-
-            <button className="btn btn-primary mt-4">
-              Register
-            </button>
+            <div>
+              <a className="link link-hover">Forgot password?</a>
+            </div>
+            <button className="btn btn-primary mt-4">Register</button>
           </fieldset>
         </form>
-
         <p>
           Already have an account?
-         
-          <Link to="/authentication/login">
-            <span className="text-secondary text-xl font-bold">
-              {" "}
-              Login
-            </span>
+          <Link to="/auth/login">
+            <span className="text-secondary text-xl font-bold"> Login</span>
           </Link>
         </p>
-
-        <SocialLogin />
+        <SocialLogin></SocialLogin>
       </div>
     </div>
   );

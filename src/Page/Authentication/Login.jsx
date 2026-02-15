@@ -145,7 +145,7 @@ const Login = () => {
     setLoading(true);
     signInUser(data.email, data.password)
       .then(() => {
-        navigate(location.state || "/");
+        navigate(location.state?.from?.pathname || "/");
         setLoading(false);
       })
       .catch((err) => {
@@ -266,7 +266,7 @@ const Login = () => {
 
         <p className="mt-4">
           Don't have an account?
-          <Link state={location.state} to="/auth/register">
+          <Link state={location.state} to="/authentication/register">
             <span className="text-secondary text-xl font-bold ml-1">
               Register
             </span>

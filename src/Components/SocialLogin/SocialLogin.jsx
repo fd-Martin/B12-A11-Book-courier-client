@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router";
-
-
+import { useLocation, useNavigate } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-
 const SocialLogin = () => {
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
   const { signInWithGoogle } = useAuth();
-  const axiosSecure = useAxiosSecure;
+  const axiosSecure = useAxiosSecure();
 
   const handleSocialLogin = () => {
     setLoading(true);
+
     signInWithGoogle()
       .then((res) => {
         const userInfo = {
@@ -20,9 +19,10 @@ const SocialLogin = () => {
           photoURL: res.user.photoURL,
           email: res.user.email,
         };
+
         if (res.user) {
           axiosSecure.post("/users", userInfo).then(() => {
-            navigate("/");
+            navigate(location.state?.from?.pathname || "/", { replace: true });
             setLoading(false);
           });
         }
@@ -34,7 +34,7 @@ const SocialLogin = () => {
 
   return (
     <div className="flex flex-col justify-center items-center ">
-      {/* Google */}
+      
       <button onClick={handleSocialLogin} className="btn bg-white text-black">
         <svg
           aria-label="Google logo"
