@@ -13,7 +13,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const axiosGeneral = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
   const { createUser, updateUserProfile } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -52,7 +52,7 @@ const Register = () => {
               photoURL: photo,
               email: data.email,
             };
-            axiosGeneral.post("/users", user).then((res) => {
+            axiosSecure.post("/users", user).then((res) => {
               if (res.data.insertedId) {
                 navigate("/");
                 Swal.fire({
@@ -72,7 +72,6 @@ const Register = () => {
         setLoading(false);
         console.log(err);
       });
-    // console.log(data);
   };
 
   if (loading) {
@@ -125,28 +124,7 @@ const Register = () => {
             {errors.email?.type === "required" && (
               <p className="text-red-500 font-semibold">Email is required</p>
             )}
-            {/* password */}
-            {/* <label className="label text-primary md:text-xl font-bold">
-              Password
-            </label>
-            <input
-              type="password"
-              className="input w-full"
-              placeholder="Password"
-              {...register("password", {
-                required: true,
-                minLength: 6,
-                pattern:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/,
-              })}
-            /> */}
 
-            {/* {errors.password && (
-              <p className="text-red-500 font-semibold">
-                Password should be one uppercase, one lowercase, one special
-                character and must be 6 digit
-              </p>
-            )} */}
             <div>
               {/* password */}
               <label className="label text-primary md:text-xl font-bold">
@@ -169,7 +147,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
                 >
                   {showPassword ? (
                     <FaEyeSlash size={20} />
