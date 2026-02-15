@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import useAuth from "../../../hooks/useAuth";
+
 import axios from "axios";
 import Swal from "sweetalert2";
-import Loading from "../../../Components/Loading/Loading";
+
 import { Link,  useNavigate } from "react-router";
-import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
-import useAxios from "../../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import Loading from "../../Components/Loading/Loading";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const axiosGeneral = useAxios();
+  const axiosGeneral = useAxiosSecure();
   const { createUser, updateUserProfile } = useAuth();
 
   const {
@@ -73,7 +75,7 @@ const Register = () => {
   };
 
   if (loading) {
-    return <Loading></Loading>;
+    return <Loading></Loading>
   }
 
   return (
