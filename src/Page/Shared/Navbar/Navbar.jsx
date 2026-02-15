@@ -33,7 +33,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/all-books"
+          to="/allbooks"
           className={({ isActive }) =>
             `px-2 py-1 ${
               isActive ? "text-blue-600 font-bold" : "hover:text-blue-600"
